@@ -81,21 +81,29 @@ class BigItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Ink(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          // image: NetworkImage(homeListItem.article.cover),
-          image: CachedNetworkImageProvider(
-            listItem.article.cover,
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      children: [
+        Ink(
+          child: InkWell(
+            splashColor: Colors.white,
+            onTap: () {},
+            child: Container(
+              height: 260,
+              width: MediaQuery.of(context).size.width,
+              child: FadeInImage(
+                placeholder: AssetImage(
+                  'lib/assets/images/article_broken_image.png',
+                ),
+                image: CachedNetworkImageProvider(
+                  listItem.article.cover,
+                ),
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
-          fit: BoxFit.cover,
         ),
-      ),
-      child: InkWell(
-        splashColor: Colors.white,
-        onTap: () {},
-        child: Container(
-          height: 260,
+        Align(
           alignment: Alignment.bottomCenter,
           child: Container(
             constraints: BoxConstraints(maxHeight: 130),
@@ -152,8 +160,8 @@ class BigItem extends StatelessWidget {
               ],
             ),
           ),
-        ),
-      ),
+        )
+      ],
     );
   }
 }
